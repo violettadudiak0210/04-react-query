@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { createPortal } from "react-dom"; 
+import { createPortal } from "react-dom";
 import css from "./MovieModal.module.css";
 import type { Movie } from "../../types/movie";
 
@@ -33,7 +33,6 @@ const MovieModal = ({ movie, onClose }: MovieModalProps) => {
     }
   };
 
-
   return createPortal(
     <div className={css.backdrop} onClick={handleBackdropClick}>
       <div className={css.modal}>
@@ -41,10 +40,16 @@ const MovieModal = ({ movie, onClose }: MovieModalProps) => {
           ✖
         </button>
         <h2>{movie.title}</h2>
+
         <img
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          src={
+            movie.backdrop_path
+              ? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}`
+              : `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+          }
           alt={movie.title}
         />
+
         <p>{movie.overview}</p>
         <p>
           <strong>Release date:</strong> {movie.release_date}
